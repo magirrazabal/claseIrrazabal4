@@ -1,5 +1,3 @@
-//MIO
-
 //clases
 class gymClase {
     constructor(nombre, hora, capacidad, disponibilidad) {
@@ -45,6 +43,7 @@ const listaClases = document.querySelector("#opciones")
 const tablaReserva = document.querySelector('#tablaReservas')
 const cuerpoReserva = document.querySelector('#cuerpo-reserva')
 const botonHistorial = document.querySelector(".botonHistorial")
+const botonReservar = document.querySelector(".botonReservar")
 
 //Funciones
 function filtrarClases() {
@@ -125,6 +124,36 @@ function recuperarLS() {
 
 
 
+const popUpReserva = () => {
+
+    let inputNombre = document.getElementById('nombre').value
+    let inputSocio = document.getElementById('socio').value
+    let inputClase = document.getElementById('clase').value
+
+    const completo = (inputNombre != "" && inputSocio != "" && inputClase != "") ? true : false
+
+    completo ? Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        iconColor: '#65292a',
+        width: '300px',
+        title: '¡Gracias por reservar!',
+        showConfirmButton: false,
+        timer: 1500
+    })
+        :
+        Swal.fire({
+            position: 'bottom-end',
+            icon: 'warning',
+            iconColor: '#65292a',
+            width: '300px',
+            title: 'No se han ingresado datos',
+            showConfirmButton: false,
+            timer: 1500
+        })
+
+}
+botonReservar.addEventListener("click", popUpReserva)
 
 
 
