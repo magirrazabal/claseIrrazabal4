@@ -8,10 +8,11 @@ body {
     display: flex;
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 80vh 70vh 100vh 1vh;
-    grid-template-areas: "header" "todas" "reserva""pie";
+    grid-template-rows: 70vh 70vh 70vh 70vh 1vh;
+    grid-template-areas:  "header" "planesDisplay" "todas" "reserva" "pie";
 
 }
+
 
 header {
     grid-area: header;
@@ -29,8 +30,25 @@ header {
     height: 350px;
     width: 1000px;
     margin-top: 5px;
+    border: #4c1f14 solid 2px;
 }
-
+#planes {
+    text-align: center;
+}
+.planesDisplay {
+    grid-area: planesDisplay;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin: 5px;
+}
+.planesDisplay div {
+padding: 15px;
+}
+.planesDisplay div:hover {
+    border: 2px solid #4c1f14;
+    border-radius: 12%;
+}
 .todas {
     grid-area: todas;
     text-align: center;

@@ -44,6 +44,59 @@ const tablaReserva = document.querySelector('#tablaReservas')
 const cuerpoReserva = document.querySelector('#cuerpo-reserva')
 const botonHistorial = document.querySelector(".botonHistorial")
 const botonReservar = document.querySelector(".botonReservar")
+const planesDisplay = document.querySelector(".planesDisplay")
+
+const URL = "/planes.json"
+  let cartasPlanes = []
+  let contenidoPlanes = ""
+
+  const peticionFetch = async ()=> {
+    const response = await fetch(URL)
+    const data = await response.json()
+          return data
+}
+
+const retornoPlanes = (contenido)=> {
+    return `<div>
+      <img src="${contenido.poster}" width="100" height="100" >
+        <h5>${contenido.titulo}</h5>
+        
+      </div>`
+}
+
+const retornoError = ()=> {
+    return `<div class="mensajeError">
+    <div class="iconoError">"⚠"</div>
+    <p>No pudimos cargar los planes</p>
+ 
+</div>`
+}
+
+const cargarPlanes = async ()=>{
+await fetch ('/planes.json')
+.then((response) => response.json())
+.then ((data)=> {
+    cartasPlanes = data
+    cartasPlanes.forEach (contenido => {
+contenidoPlanes += retornoPlanes(contenido)
+    });
+    planesDisplay.innerHTML = contenidoPlanes
+})
+.catch ((error) => {
+    planesDisplay.innerHTML = retornoError();
+     Swal.fire({
+         position: 'top-end',
+         icon: 'error',
+         iconColor: '#65292a',
+         width: '300px',
+         title: 'Parece que hubo un error, intenta de nuevo más tarde',
+         showConfirmButton: false,
+         timer: 3500
+     })
+
+})
+}
+cargarPlanes()
 
 //Funciones
 function filtrarClases() {
