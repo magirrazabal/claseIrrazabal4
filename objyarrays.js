@@ -58,7 +58,7 @@ const URL = "/planes.json"
 
 const retornoPlanes = (contenido)=> {
     return `<div>
-      <img src="${contenido.poster}" width="100" height="100" >
+      <img src="${contenido.poster}" width="50" height="50" >
         <h5>${contenido.titulo}</h5>
         
       </div>`

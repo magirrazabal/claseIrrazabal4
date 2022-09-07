@@ -1,6 +1,6 @@
 [
     {  "id": 1,
-       "poster": "/imagenes/wg.png",
+       "poster": "/imagenes/premium.png",
        "titulo": "Premium",
        "horario": "Todo el día",
        "reservas": "36hs antes",
@@ -9,7 +9,7 @@
     },
     {
       "id": 2,
-      "poster": "/imagenes/wg.png",
+      "poster": "/imagenes/plus.png",
       "titulo": "Plus",
       "horario": "Todo el día",
       "reservas": "24hs antes",
@@ -18,7 +18,7 @@
      },
      {
       "id": 3,
-      "poster": "/imagenes/wg.png",
+      "poster": "/imagenes/move.png",
       "titulo": "Move",
       "horario": "6 a 11 - 18 a 22",
       "reservas": "24hs antes",
@@ -27,7 +27,7 @@
      },
      {
       "id": 4,
-      "poster": "/imagenes/wg.png",
+      "poster": "/imagenes/basic.png",
       "titulo": "Basic",
       "horario": "Todo el día",
       "reservas": "No incluye reservas",
@@ -36,7 +36,7 @@
      },
      {
       "id": 5,
-      "poster": "/imagenes/wg.png",
+      "poster": "/imagenes/ocasional.png",
       "titulo": "Ocasional",
       "horario": "6 a 11 - 18 a 22",
       "reservas": "No incluye reservas",
