@@ -32,8 +32,6 @@ const recuperarPlanes = ()=> {
     if (planLS) {
         planesDetalle.innerHTML = detallarPlanes(planLS)
 
-    } else {
-        planesDetalle.innerHTML = retornoError()
     }
 }
 recuperarPlanes ()

@@ -46,8 +46,9 @@ const cuerpoReserva = document.querySelector('#cuerpo-reserva')
 const botonHistorial = document.querySelector(".botonHistorial")
 const botonReservar = document.querySelector(".botonReservar")
 const planesDisplay = document.querySelector(".planesDisplay")
+const loading = document.querySelector(".loading")
 
-const URL = "/planes.json";
+const URL = "/json/planes.json";
 const URLsocios = "/socios.json";
 let cartasPlanes = [];
 let contenidoPlanes = "";
@@ -61,7 +62,7 @@ const peticionFetch = async () => {
 const sociosFetch = async () => {
     const response = await fetch(URLsocios);
     const data = await response.json();
-    reservaClases = { ...data }
+    reservaClases = [...data]
     localStorage.setItem("usuario", JSON.stringify(reservaClases))
     recuperarLS()
 };
@@ -93,12 +94,14 @@ const cargarPlanes = async () => {
             cartasPlanes = data;
             cartasPlanes.forEach(contenido => {
                 contenidoPlanes += retornoPlanes(contenido)
+                loading.innerHTML = ""
             });
 
             planesDisplay.innerHTML = contenidoPlanes
         })
         .catch((error) => {
             planesDisplay.innerHTML = retornoError();
+            loading.innerHTML = ""
             Swal.fire({
                 position: 'top-end',
                 icon: 'error',
@@ -108,8 +111,9 @@ const cargarPlanes = async () => {
                 showConfirmButton: false,
                 timer: 3500
             });
-
+        
         });
+
     let btnPlanes = document.getElementsByClassName('planes')
     for (const btn of btnPlanes) {
         btn.addEventListener('click', detallePlanes)
@@ -120,6 +124,7 @@ const cargarPlanes = async () => {
             location.href = 'planes.html'
         }
     }
+
 }
 cargarPlanes()
 
@@ -137,7 +142,7 @@ function filtrarClases() {
                                 <td>${nombre}</td>
                                 <td>${hora}</td>
                                 <td>${capacidad}</td>
-                                <td>${disponibilidad}</td>
+                                <td>${disponibilidad ? 'Disponible' : 'Completa'}</td>
                             </tr>`
     })
 
@@ -231,6 +236,8 @@ const popUpReserva = () => {
         })
 
 }
+
+
 botonReservar.addEventListener("click", popUpReserva)
 
 
