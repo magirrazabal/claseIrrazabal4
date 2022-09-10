@@ -127,3 +127,24 @@ h2 {
   .pie {
     grid-area: pie;
 }
+
+#plan {
+    display: flex;
+    justify-content: center;
+}
+
+#plan img {
+height: 150px;
+width: 150px;
+border: none;
+}
+
+#plan h5 {
+    padding: 5px;
+    text-align: center;
+}
+
+.card {
+    border: none;
+    align-items: center;
+}

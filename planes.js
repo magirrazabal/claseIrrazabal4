@@ -5,16 +5,16 @@ let planLS = JSON.parse(localStorage.getItem('plan'))
 console.table(planLS);
 btnVolver.addEventListener("click", () => location.href = "index.html")
 
-const detallarPlanes = (cadaPlan) => {
-    const {poster, titulo, horario, reservas, minimo, precio} = cadaPlan
+const detallarPlanes = (planLS) => {
+    const {poster, titulo, horario, reservas, minimo, precio} = planLS
     return `<div class= "card content">
     <img src="${poster}">
     <h5 class="card-title">${titulo}</h5>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">${horario}</li>
-      <li class="list-group-item">${reservas}</li>
-      <li class="list-group-item">${minimo}</li>
-      <li class="list-group-item">${precio}</li>
+      <li class="list-group-item">Horario: ${horario}</li>
+      <li class="list-group-item">Reservas: ${reservas}</li>
+      <li class="list-group-item">Periodo mínimo: ${minimo}</li>
+      <li class="list-group-item">Valor: ${precio}</li>
     </ul>
     </div>`
 }
@@ -29,8 +29,7 @@ const retornoError = () => {
 
 const recuperarPlanes = ()=> {
     
-    if (localStorage.cadaPlan) {
-        const planLS = JSON.parse(localStorage.getItem('plan'))
+    if (planLS) {
         planesDetalle.innerHTML = detallarPlanes(planLS)
 
     } else {
