@@ -31,7 +31,8 @@ const clase5 = new gymClase("Boxeo", "lunes a viernes 19:00", 20, false)
 
 // //arrays
 const clases = [clase1, clase2, clase3, clase4, clase5];
-let reservaClases = []
+let reservaClases = [];
+let arrayPlanes = [];
 
 //DOM
 const botonFiltrar = document.querySelector(".botonFiltrar")
@@ -46,25 +47,37 @@ const botonHistorial = document.querySelector(".botonHistorial")
 const botonReservar = document.querySelector(".botonReservar")
 const planesDisplay = document.querySelector(".planesDisplay")
 
-const URL = "/planes.json"
-  let cartasPlanes = []
-  let contenidoPlanes = ""
+const URL = "/planes.json";
+const URLsocios = "/socios.json";
+let cartasPlanes = [];
+let contenidoPlanes = "";
 
-  const peticionFetch = async ()=> {
+const peticionFetch = async () => {
     const response = await fetch(URL)
     const data = await response.json()
-          return data
+    return data
 }
 
-const retornoPlanes = (contenido)=> {
-    return `<div>
+const sociosFetch = async () => {
+    const response = await fetch(URLsocios);
+    const data = await response.json();
+    reservaClases = { ...data }
+    localStorage.setItem("usuario", JSON.stringify(reservaClases))
+    recuperarLS()
+};
+
+sociosFetch()
+
+
+const retornoPlanes = (contenido) => {
+    return `<div id="${contenido.id}" class="planes">
       <img src="${contenido.poster}" width="50" height="50" >
         <h5>${contenido.titulo}</h5>
         
       </div>`
 }
 
-const retornoError = ()=> {
+const retornoError = () => {
     return `<div class="mensajeError">
     <div class="iconoError">"⚠"</div>
     <p>No pudimos cargar los planes</p>
@@ -72,29 +85,41 @@ const retornoError = ()=> {
 </div>`
 }
 
-const cargarPlanes = async ()=>{
-await fetch ('/planes.json')
-.then((response) => response.json())
-.then ((data)=> {
-    cartasPlanes = data
-    cartasPlanes.forEach (contenido => {
-contenidoPlanes += retornoPlanes(contenido)
-    });
-    planesDisplay.innerHTML = contenidoPlanes
-})
-.catch ((error) => {
-    planesDisplay.innerHTML = retornoError();
-     Swal.fire({
-         position: 'top-end',
-         icon: 'error',
-         iconColor: '#65292a',
-         width: '300px',
-         title: 'Parece que hubo un error, intenta de nuevo más tarde',
-         showConfirmButton: false,
-         timer: 3500
-     })
+const cargarPlanes = async () => {
+    await fetch('/planes.json')
+        .then((response) => response.json())
+        .then((data) => {
+            arrayPlanes = [...data]
+            cartasPlanes = data;
+            cartasPlanes.forEach(contenido => {
+                contenidoPlanes += retornoPlanes(contenido)
+            });
 
-})
+            planesDisplay.innerHTML = contenidoPlanes
+        })
+        .catch((error) => {
+            planesDisplay.innerHTML = retornoError();
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                iconColor: '#65292a',
+                width: '300px',
+                title: 'Parece que hubo un error, intenta de nuevo más tarde',
+                showConfirmButton: false,
+                timer: 3500
+            });
+
+        });
+    let btnPlanes = document.getElementsByClassName('planes')
+    for (const btn of btnPlanes) {
+        btn.addEventListener('click', detallePlanes)
+
+        function detallePlanes() {
+            let plan = arrayPlanes.find(item => item.id == btn.id)
+            localStorage.setItem('plan', JSON.stringify(plan))
+            location.href = 'planes.html'
+        }
+    }
 }
 cargarPlanes()
 
